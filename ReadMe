@@ -1,1 +1,23 @@
 this is my test
+
+## Grafana and Prometheus
+
+Start the local monitoring stack with Docker Compose:
+
+```sh
+docker compose up -d
+```
+
+- Grafana: http://localhost:3000 (default login: `admin` / `admin`; change the password on first login)
+- Prometheus: http://localhost:9090
+
+Grafana is provisioned with Prometheus as its default data source. Prometheus
+scrapes its own metrics every 15 seconds. To monitor another service, add its
+scrape configuration to `prometheus/prometheus.yml` and restart Prometheus:
+
+```sh
+docker compose restart prometheus
+```
+
+Stop the services with `docker compose down`. Data is retained in named Docker
+volumes; use `docker compose down -v` to remove it.
